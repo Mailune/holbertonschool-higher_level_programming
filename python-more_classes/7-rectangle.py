@@ -13,15 +13,17 @@ class Rectangle:
 
     def __init__(self, width=0, height=0):
         """Initialize a Rectangle instance."""
-        self.set_width(width)
-        self.set_height(height)
-        Rectangle.number_of_instances += 1
+        self.width = width
+        self.height = height
+        type(self).number_of_instances += 1
 
-    def get_width(self):
+    @property
+    def width(self):
         """Get the width of the rectangle."""
         return self.__width
 
-    def set_width(self, value):
+    @width.setter
+    def width(self, value):
         """Set the width of the rectangle."""
         if not isinstance(value, int):
             raise TypeError("width must be an integer")
@@ -29,11 +31,13 @@ class Rectangle:
             raise ValueError("width must be >= 0")
         self.__width = value
 
-    def get_height(self):
+    @property
+    def height(self):
         """Get the height of the rectangle."""
         return self.__height
 
-    def set_height(self, value):
+    @height.setter
+    def height(self, value):
         """Set the height of the rectangle."""
         if not isinstance(value, int):
             raise TypeError("height must be an integer")
@@ -55,12 +59,12 @@ class Rectangle:
         """Return a string representation of the rectangle."""
         if self.__width == 0 or self.__height == 0:
             return ""
-        rectangle = ""
+        rectangle = []
         for i in range(self.__height):
-            rectangle += str(Rectangle.print_symbol) * self.__width
+            rectangle.append(str(self.print_symbol) * self.__width)
             if i != self.__height - 1:
-                rectangle += "\n"
-        return rectangle
+                rectangle.append("\n")
+        return "".join(rectangle)
 
     def __repr__(self):
         """Return a string representation of the rectangle."""
@@ -69,4 +73,4 @@ class Rectangle:
     def __del__(self):
         """Print a message when the rectangle is deleted."""
         print("Bye rectangle...")
-        Rectangle.number_of_instances -= 1
+        type(self).number_of_instances -= 1
