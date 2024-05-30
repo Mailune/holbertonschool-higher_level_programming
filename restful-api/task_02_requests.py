@@ -29,8 +29,3 @@ def fetch_and_save_posts():
             writer.writeheader()
             for post in posts:
                 writer.writerow(post)
-
-
-if __name__ == "__main__":
-    fetch_and_print_posts()
-    fetch_and_save_posts()
