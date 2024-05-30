@@ -1,14 +1,13 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
 
-
 class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
     """Custom request handler for the HTTP server."""
 
     def do_GET(self):
         """Handle GET requests."""
-        # Handling GET requests
-        if self.path == '/':
+        # Normalize path
+        if self.path in ['', '/']:
             # Root endpoint
             self.send_response(200)
             self.send_header('Content-type', 'text/plain')
@@ -34,7 +33,6 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(b"Endpoint not found")
 
-
 def run():
     """Run the HTTP server."""
     # Set up the server
@@ -44,6 +42,6 @@ def run():
     # Start the server
     httpd.serve_forever()
 
-
+# Call the run function to start the server
 if __name__ == '__main__':
     run()
